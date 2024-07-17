@@ -1,7 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const { PrismaClient } = require("@prisma/client");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const prisma = new PrismaClient();
@@ -31,6 +33,7 @@ app.post("/", async (req, res) => {
       success: true,
       data: { ...url, shortUrl },
       message: "URL shortened successfully",
+      uniqueId,
     });
   } catch (e) {
     console.error(e);
